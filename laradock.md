@@ -114,7 +114,9 @@ sudo /etc/init.d/networking restart
 
     $ docker-compose run --rm web createuser //创建用户
 
+    //https://docs.sentry.io/server/cli/   sentry常用命令
 
+    $ docker-compose run web command sub-command
 
 4. access.log 日志分析
 
