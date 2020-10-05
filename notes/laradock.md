@@ -1,7 +1,14 @@
+---
+title: laradock
+tags: [Import-715b]
+created: '2020-08-11T10:40:23.727Z'
+modified: '2020-09-26T08:55:58.789Z'
+---
+
 ### laradock
 
 ```
-$ docker-compose up -d nginx workspace mysql redis php-fpm beanstalkd
+$ docker-compose up -d nginx mysql php-fpm redis workspace beanstalkd
 
 $ docker-compose up -d nginx mysql redis workspace
 
@@ -14,7 +21,6 @@ $ docker-compose build workspace //构建workspace容器
 $ docker-compose exec --user=laradock workspace bash //进入workspace
 
 npm run dev:s  //运行node app
-
 修改workspace ports
 ports:
 
@@ -24,6 +30,7 @@ ports:
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 //nginx
+
 $ docker-compose exec nginx bash
 ```
 
@@ -83,25 +90,6 @@ sudo /etc/init.d/networking restart
 
 4. CPU高性能
     https://blog.csdn.net/li528405176/article/details/82823922?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight
-
-5. github clone很慢
-
-    1. 用 git 内置代理，直接走系统中运行的代理工具中转，比如，你的 SS 本地端口是 1080（一般port均为1080），那么可以如下方式走代理：
-
-    git config --global http.proxy socks5://127.0.0.1:1080      //1080可能要修改下
-    git config --global https.proxy socks5://127.0.0.1:1080     //1080可能要修改下
-    2.git clone特别慢是因为github.global.ssl.fastly.net域名被限制了。
-    只要找到这个域名对应的ip地址，然后在hosts文件中加上ip–>域名的映射，刷新DNS缓存便可。
-
-
-
-    在hosts文件后面加上两行：
-
-    151.101.72.249 http://global-ssl.fastly.Net
-    192.30.253.112 http://github.com
-    好了，再试试clone，看看效果吧
-
-    https://blog.csdn.net/qq_35992422/article/details/106946775
 
 ```
 
@@ -170,10 +158,6 @@ Settings->Keymap 搜索 “Navigate”
 把“Forward”的配置删除，重新配置称“Ctrl+Alt+向右箭头”
 
 ```
-//命令行启动
-nohup sh /home/xiaoguo/phpstrom/bin/phpstorm.sh >/dev/null >/dev/null 2>&1 &
-
-https://blog.csdn.net/envon123/article/details/82144401
 
 https://www.jetbrains.com/phpstorm/download/other.html
 
