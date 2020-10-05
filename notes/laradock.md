@@ -1,7 +1,14 @@
+---
+title: laradock
+tags: [Import-715b]
+created: '2020-08-11T10:40:23.727Z'
+modified: '2020-09-26T08:55:58.789Z'
+---
+
 ### laradock
 
 ```
-$ docker-compose up -d nginx workspace mysql php-fpm redis beanstalkd
+$ docker-compose up -d nginx mysql php-fpm redis workspace beanstalkd
 
 $ docker-compose up -d nginx mysql redis workspace
 
@@ -14,7 +21,6 @@ $ docker-compose build workspace //构建workspace容器
 $ docker-compose exec --user=laradock workspace bash //进入workspace
 
 npm run dev:s  //运行node app
-
 修改workspace ports
 ports:
 
@@ -24,6 +30,7 @@ ports:
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 //nginx
+
 $ docker-compose exec nginx bash
 ```
 
@@ -151,10 +158,6 @@ Settings->Keymap 搜索 “Navigate”
 把“Forward”的配置删除，重新配置称“Ctrl+Alt+向右箭头”
 
 ```
-//命令行启动
-nohup sh /home/xiaoguo/phpstrom/bin/phpstorm.sh >/dev/null >/dev/null 2>&1 &
-
-https://blog.csdn.net/envon123/article/details/82144401
 
 https://www.jetbrains.com/phpstorm/download/other.html
 

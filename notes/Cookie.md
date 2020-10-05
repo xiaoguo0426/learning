@@ -37,7 +37,7 @@ Cookie主要用于三个方面：
 
 - 存储大小不同
 
-> 单个Cookie保存的数据不能超过4k；Session可存储数据大小远远高于Cookie
+> 单个Cookie保存的数据不能超过4KB；Session可存储数据大小远远高于Cookie
 
 ![](assets/markdown-img-paste-20190918200825871.png)
 
