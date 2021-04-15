@@ -11,6 +11,8 @@ $ docker-compose build workspace //构建workspace容器
 
 //workspace
 
+$ docker-compose build --no-cache workspace
+
 $ docker-compose exec --user=laradock workspace bash //进入workspace
 
 npm run dev:s  //运行node app
@@ -20,11 +22,28 @@ ports:
 
     - "8081:8081"
 
+//安装pip
+apt-get install python3-pip
 
+sudo apt-get install cmake
+
+×××××××××××××××××××××××××××××××××
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+
+composer install --no-dev   
+×××××××××××××××××××××××××××××××××
 
 //nginx
 $ docker-compose exec nginx bash
+
+
+*********************************
+checking for libzstd files in default path... not found
+configure: error: Please reinstall the libzstd distribution
+ERROR: `/tmp/pear/temp/redis/configure --with-php-config=/usr/bin/php-config --enable-redis-igbinary=no --enable-redis-lzf=n --enable-redis-zstd=n' failed
+
+$ sudo apt update && sudo apt install libzstd-dev
+
 ```
 
 ##### .env
@@ -40,9 +59,14 @@ PHP_FPM_INSTALL_XDEBUG=true
 
 PHP_FPM_INSTALL_RDKAFKA=true
 
+WORKSPACE_INSTALL_PYTHON3=true
+
 DB_HOST=mysql
 REDIS_HOST=redis
 QUEUE_HOST=beanstalkd
+
+
+https://juejin.cn/post/6844903569972264974
 
 ```
 
@@ -81,6 +105,10 @@ sudo /etc/init.d/networking restart
     https://portal.shadowsocks.nz/knowledgebase/160/
     https://www.jianshu.com/p/3f392367b41f
 
+
+    小木马邮件复制
+    export HTTP_PROXY=http://127.0.0.1:58591; export HTTPS_PROXY=http://127.0.0.1:58591; export ALL_PROXY=socks5://127.0.0.1:51837
+
 4. CPU高性能
     https://blog.csdn.net/li528405176/article/details/82823922?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight
 
@@ -102,6 +130,16 @@ sudo /etc/init.d/networking restart
     好了，再试试clone，看看效果吧
 
     https://blog.csdn.net/qq_35992422/article/details/106946775
+
+
+6. docker 安装问题
+    docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock
+
+
+    sudo groupadd docker
+    sudo gpasswd -a $USER docker
+    newgrp docker
+    docker ps
 
 ```
 
@@ -156,6 +194,30 @@ sudo /etc/init.d/networking restart
 5. snapd returned status code 409: Conflict
     sudo rm -r /var/lib/apt/lists/* && sudo apt update
 
+6. Ubuntu必备软件
+
+    PHPStrom，
+    postman，
+    gitkraken,
+    atom,
+    sublime text3,
+    vmwawre,
+    chromuin,
+    oh my zsh,
+    VLC媒体播放器,
+    docker,
+    sougou_pinyin,
+    mysql worksbench,
+    Insomnia,
+    teamviewer,
+    wps,
+    unity tweak tool, //主题
+    folder-color //文件夹颜色
+    wonderwall //背景图
+    trimage //图片压缩
+    jpegoptim//图片压缩
+
+
 ```
 
 #### PHPStrom快捷键
@@ -184,3 +246,9 @@ https://www.jetbrains.com/phpstorm/download/other.html
 cat redis.conf | grep -v "#" | grep -v "^$" > test.conf
 //去掉redis.conf文件中的注释和空行并输出到test.conf中
 ```
+
+
+
+
+PHP性能监控之tideways
+https://note.youdao.com/ynoteshare1/index.html?id=c2537c596b9f8595969c161469513a3f&type=note#/
