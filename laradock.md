@@ -36,13 +36,33 @@ composer install --no-dev
 //nginx
 $ docker-compose exec nginx bash
 
+配置多个应用间相互调用
+docker-compose.yml
+nginx
+
+networks:
+        frontend:
+            aliases:
+              - www.chemex.test
+        backend:
+            aliases:
+              - www.chemex.test
+
 
 *********************************
+安装Redis遇到的问题
 checking for libzstd files in default path... not found
 configure: error: Please reinstall the libzstd distribution
 ERROR: `/tmp/pear/temp/redis/configure --with-php-config=/usr/bin/php-config --enable-redis-igbinary=no --enable-redis-lzf=n --enable-redis-zstd=n' failed
 
 $ sudo apt update && sudo apt install libzstd-dev
+
+
+*********************************
+
+PHP 版本变更后，需要把workspace,php-fpm两个容器重新构建
+
+$ docker-compose build --no-cache workspace php-fpm
 
 ```
 
@@ -78,13 +98,6 @@ sudo kill -9 xxxx
 
 ```
 
-#### hosts修改
-```
-sudo vim /etc/hosts
-
-sudo /etc/init.d/networking restart
-
-```
 
 #### Ubuntu
 ```
@@ -140,6 +153,14 @@ sudo /etc/init.d/networking restart
     sudo gpasswd -a $USER docker
     newgrp docker
     docker ps
+
+
+7. hosts修改
+
+    sudo vim /etc/hosts
+
+    sudo /etc/init.d/networking restart
+
 
 ```
 
@@ -252,3 +273,19 @@ cat redis.conf | grep -v "#" | grep -v "^$" > test.conf
 
 PHP性能监控之tideways
 https://note.youdao.com/ynoteshare1/index.html?id=c2537c596b9f8595969c161469513a3f&type=note#/
+
+
+************************************************************
+
+kafkamanager
+
+docker run -d -eZK_HOSTS=172.20.0.8 -eKAFKA_MANAGER_AUTH_ENABLED=false kafkamanager/kafka-manager
+
+
+
+
+docker run -d --name kafkadocker_zookeeper_1  dockerkafka/zookeeper
+
+docker run -d --name kafkadocker_kafka_1 --link laradock_zookeeper dockerkafka/kafka
+
+docker run -it --rm --link laradock_zookeeper --link kafkadocker_kafka_1:kafka -p 9000:9000 -e ZK_HOSTS=172.20.0.8:2181 kafkamanager/kafka-manager
