@@ -17,6 +17,11 @@ $ docker-compose exec --user=laradock workspace bash //进入workspace
 
 npm run dev:s  //运行node app
 
+# 安装imap扩展
+sudo apt install php-imap
+sudo phpenmod imap
+
+
 修改workspace ports
 ports:
 
@@ -145,6 +150,13 @@ sudo kill -9 xxxx
     https://blog.csdn.net/qq_35992422/article/details/106946775
 
 
+    2. 关于gits打开很慢
+
+      http://ping.chinaz.com/gist.github.com  查找对应的IP，修改本机hosts
+
+      https://www.zhihu.com/question/21343711
+
+
 6. docker 安装问题
     docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock
 
@@ -160,6 +172,16 @@ sudo kill -9 xxxx
     sudo vim /etc/hosts
 
     sudo /etc/init.d/networking restart
+
+
+8. 连不上局域网问题
+
+   arp -a  //查看ip被占用情况
+   ![](assets/markdown-img-paste-20210825185242551.png)
+
+   确认了192.168.1.250被docker0占用了
+
+   /etc/docker/daemon.json 修改bip 192.168.200.1/24,重启 systemctl restart docker
 
 
 ```
