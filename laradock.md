@@ -184,6 +184,9 @@ sudo kill -9 xxxx
    /etc/docker/daemon.json 修改bip 192.168.200.1/24,重启 systemctl restart docker
 
 
+9.
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 ```
 
 #### MySQL
@@ -311,3 +314,19 @@ docker run -d --name kafkadocker_zookeeper_1  dockerkafka/zookeeper
 docker run -d --name kafkadocker_kafka_1 --link laradock_zookeeper dockerkafka/kafka
 
 docker run -it --rm --link laradock_zookeeper --link kafkadocker_kafka_1:kafka -p 9000:9000 -e ZK_HOSTS=172.20.0.8:2181 kafkamanager/kafka-manager
+
+
+
+*****************************************************************
+iptables -L -n --line-number
+
+iptables -L
+
+
+iptables -D INPUT 1
+
+
+service iptables save
+
+
+service iptables restart

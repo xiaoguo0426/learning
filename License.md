@@ -23,3 +23,11 @@ https://www.elastic.co/cn/pricing/faq/licensing
 
 MongoDB
 https://www.zdnet.com/article/its-mongodbs-turn-to-change-its-open-source-license/
+
+
+如何选择一个合适的License
+https://choosealicense.com/
+
+
+对于没有声明License
+https://choosealicense.com/no-permission/
