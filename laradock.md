@@ -237,8 +237,20 @@ sudo systemctl restart docker
 
     goaccess app_access.log -a -o ~/workplace/logs/report.html --real-time-html  --time-format '%H:%M:%S' --date-format '%d/%b/%Y' --log-format='COMMON'
 
-5. snapd returned status code 409: Conflict
-    sudo rm -r /var/lib/apt/lists/* && sudo apt update
+5. status-code=409 kind=snap-change-conflict
+
+这个问题通常是由于系统上已安装了相同名称的 snap 软件包，导致新安装的软件包无法同名共存而产生的冲突。解决方法如下：
+
+列出所有已安装的 snap 软件包：
+$ snap list
+确定产生冲突的软件包名称，执行卸载命令：
+$ sudo snap remove <软件包名称>
+重新安装软件包：
+$ sudo snap install <软件包名称>
+如果问题仍然存在，可能是因为 snapd 服务未能正确运行。可以尝试重启服务或重新安装 snapd 软件包：
+
+$ sudo systemctl restart snapd.service
+$ sudo apt-get install --reinstall snapd
 
 6. Ubuntu必备软件
 
