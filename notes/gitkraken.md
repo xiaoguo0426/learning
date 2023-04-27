@@ -21,7 +21,10 @@ $ tar -xzf GitKraken-v9.2.1.tar.gz
 $ yarn install
 $ yarn build
 $ node dist/bin/gitcracken.js patcher --asar /path/to/gitkraken/resources/app.asar
+
 ```
+
+右下角显示为Pro 则成功
 
 #### 创建快捷方式
 
