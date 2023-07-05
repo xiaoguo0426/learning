@@ -21,6 +21,13 @@ npm run dev:s  //运行node app
 sudo apt install php-imap
 sudo phpenmod imap
 
+#安装node
+修改workspace的Dockerfile node的url
+https://gitee.com/mirrors/nvm/raw/v0.38.0/install.sh
+
+#php默认版本
+# rm -rf /etc/alternatives/php
+# ln -s /usr/bin/php7.4 /etc/alternatives/php
 
 修改workspace ports
 ports:
@@ -33,7 +40,12 @@ apt-get install python3-pip
 sudo apt-get install cmake
 
 ×××××××××××××××××××××××××××××××××
+//阿里源
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+//腾讯源
+composer config -g repos.packagist composer https://mirrors.tencent.com/composer/
+//中国源
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 composer install --no-dev   
 ×××××××××××××××××××××××××××××××××
@@ -53,6 +65,7 @@ networks:
             aliases:
               - www.chemex.test
 
+修改后需要执行docker-compose down 重新up一个新的容器即可
 
 *********************************
 安装Redis遇到的问题
@@ -63,11 +76,10 @@ ERROR: `/tmp/pear/temp/redis/configure --with-php-config=/usr/bin/php-config --e
 $ sudo apt update && sudo apt install libzstd-dev
 
 
+pecl install -o -f redis
+pecl install igbinary    # 安装序列器扩展
+
 *********************************
-
-PHP 版本变更后，需要把workspace,php-fpm两个容器重新构建
-
-$ docker-compose build --no-cache workspace php-fpm
 
 ```
 
@@ -342,3 +354,57 @@ service iptables save
 
 
 service iptables restart
+
+
+
+******************************************************************
+
+删除所有不使用的镜像
+> docker image prune --force --all
+
+删除所有停止的容器
+> docker container prune -f
+
+删除所有不适用的挂载
+> docker volume prune
+
+停止、删除所有的docker容器和镜像
+> docker ps -aq
+
+停止所有的容器
+> docker stop $(docker ps -aq)
+
+删除所有的容器
+> docker rm $(docker ps -aq)
+
+删除所有的镜像
+> docker rmi $(docker images -q)
+
+
+*****************************************************************
+
+> sudo apt-get update
+sudo apt-get install jpegoptim
+sudo apt-get install optipng
+
+> jpegoptim *.jpg    //jpg无损压缩
+find . -name '*.jpg' | xargs jpegoptim --strip-all    //递归执行jpg无损压缩
+find -type f -name "*.jpg" -exec jpegoptim --strip-all {} \;  //另一种递归执行jpg无损压缩
+
+> sudo optipng *.png      //无损压缩png
+find -type f -name "*.png" -exec optipng {} \;  //递归执行无损压缩png
+
+
+
+**********************************
+搜狗输入法崩溃后重启：
+
+打开终端，输入以下命令以停止搜狗输入法服务：
+> sudo killall fcitx
+
+输入以下命令启动搜狗输入法服务：
+> fcitx &
+
+现在您已经重启了输入法服务，可以重新使用搜狗输入法了。
+
+**********************************
