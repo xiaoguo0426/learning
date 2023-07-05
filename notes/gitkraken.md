@@ -22,6 +22,8 @@ $ yarn install
 $ yarn build
 $ node dist/bin/gitcracken.js patcher --asar /path/to/gitkraken/resources/app.asar
 
+修改hosts
+127.0.0.1 release.gitkraken.com
 ```
 
 右下角显示为Pro 则成功
