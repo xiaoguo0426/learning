@@ -408,3 +408,8 @@ find -type f -name "*.png" -exec optipng {} \;  //递归执行无损压缩png
 现在您已经重启了输入法服务，可以重新使用搜狗输入法了。
 
 **********************************
+查看保存的Wi-Fi连接密码
+
+sudo grep -r 'psk=' /etc/NetworkManager/system-connections/
+
+**********************************

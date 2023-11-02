@@ -44,3 +44,7 @@ http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
 
 ### SEO
 https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag?hl=zh-cn#data-nosnippet-attr
+
+
+### HTTP规范
+https://developer.mozilla.org/zh-CN/docs/Web/HTTP
