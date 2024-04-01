@@ -39,3 +39,14 @@ Location: https://account.jetbrains.com/fls-auth
 激活使用jetbrains全家桶方式和censys一样,激活之后我们可以看到用的是 天津理工大学 的 jetbrains授权服务器 。
 
 ![](assets/markdown-img-paste-20240221150737396.png)
+
+
+#### 通过Fofa
+
+主要用到的代码
+```code
+header="https://account.jetbrains.com/fls-auth"
+```
+https://fofa.info/result?qbase64=aGVhZGVyPSJodHRwczovL2FjY291bnQuamV0YnJhaW5zLmNvbS9mbHMtYXV0aCI%3D
+
+![](assets/markdown-img-paste-20240401095700316.png)
