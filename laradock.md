@@ -224,7 +224,7 @@ sudo systemctl restart docker
 2. portainer可视化容器管理后台
 
     localhost:9010
-    admin 123123123
+    admin 123123123123
 
     //nginx.conf
     proxy_pass http://portainer:9000;// just for laradock
