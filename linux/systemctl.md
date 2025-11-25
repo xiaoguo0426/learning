@@ -99,7 +99,7 @@ CPUQuota=50%
 
 > vim /etc/systemd/system/mytimer.timer
 
-```code 
+```code
 [Unit]
 Description=Run my task daily
 
@@ -120,3 +120,20 @@ WantedBy=timers.target
 
 3. 快速查找：列出所有失败的服务
    systemctl --failed
+
+## 六、命令速查
+| 功能需求            | 命令示例     |
+| :-------------    | :------------- |
+| 查看服务状态        | systemctl status 服务名       |
+| 启动服务            | systemctl start 服务名       |
+| 停止服务            | systemctl stop 服务名       |
+| 重启服务            | systemctl restart 服务名       |
+| 平滑重载配置        | systemctl reload 服务名       |
+| 设置开机自启        | systemctl enable 服务名       |
+| 取消开机自启         | systemctl disable 服务名       |
+| 锁定服务（禁止启动）        | systemctl mask 服务名       |
+| 解锁服务            | systemctl unmask 服务名       |
+| 查看服务依赖         | systemctl list-dependencies 服务名       |
+| 实时查看服务日志         | journalctl -u 服务名 -f       |
+| 重载服务配置文件         | systemctl daemon-reload       |
+| 查看所有运行的服务         | systemctl list-units --type=service       |
