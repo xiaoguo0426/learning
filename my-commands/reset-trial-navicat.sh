@@ -1,0 +1,1 @@
+/home/xiaoguo0426/my-commands/reset-trial-navicat.sh
