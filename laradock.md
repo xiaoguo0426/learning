@@ -199,7 +199,31 @@ sudo kill -9 xxxx
 9.
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+
+
+10. csv 查看
+
+# Ubuntu/Debian
+sudo apt install csvkit
+
+# 查看CSV文件前10行（表格格式）
+csvlook filename.csv | head -n 20
+
+# 查看列信息
+csvcut -n filename.csv
+
+# 查看统计信息
+csvstat filename.csv
+
+# 查看特定列
+csvcut -c 1,3,5 filename.csv | csvlook
 ```
+
+11. 截图软件
+
+    1. 系统自带。配置快捷键 Alt + Q
+
+    2. https://www.snipaste.com/ 配置快捷键  Alt + W
 
 #### MySQL
 

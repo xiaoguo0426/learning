@@ -46,8 +46,16 @@ Type=Application
 Categories=Development;
 
 
-sudo desktop-file-install /usr/share/applications/gitkraken.desktop #是根据上面的路径而定，没试过
+# 刷新桌面数据库
+update-desktop-database ~/.local/share/applications/
 
-gnome-shell --replace & #直接gnome挂了，慎用
+# 对于全局快捷方式
+sudo update-desktop-database /usr/share/applications/
+
+# 检查桌面文件是否存在
+ls -la ~/.local/share/applications/ | grep postman
+
+# 测试执行命令
+gtk-launch postman.desktop
 
 ```
