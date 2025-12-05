@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# 引入公共部分
+source /home/xiaoguo0426/my-commands/common.sh
+
+laradock_path="$HOME/gits/laradock"
+docker_compose="docker compose"
+
+# 获取最后一个参数
+last_arg="${@: -1}"
+if [[ $last_arg =~ ^--(74|81)$ ]]; then          # ← 就是缺了这句
+    version="${last_arg#--}"
+    laradock_path="$HOME/gits/laradock$version"
+
+    # 判断目录是否存在
+    if [[ ! -d $laradock_path ]]; then
+        log_error "❌ 目录不存在: $laradock_path"
+        exit 1
+    fi
+
+    # 从参数列表里剔除版本选项
+    set -- "${@:1:$(($#-1))}"
+fi
+
+log_info "✨ 当前目录是 $laradock_path"
+
+
+# https://emojipedia.org/
+
+# 检查参数数量
+if [ "$#" -lt 1 ]; then
+  log_error "❌ laradock 缺少参数"
+  exit 1
+fi
+
+# 切换到 laradock 目录
+cd "$laradock_path" || {
+  log_error "❌ 无法切换到 Laradock 目录: $laradock_path"
+  exit 1
+}
+
+# 处理不同命令
+case "$1" in
+  "ps")
+    $docker_compose ps 
+    ;;
+  "up")
+    # up 命令必须传第二个参数，并添加 -d 选项
+    if [ "$#" -lt 2 ]; then
+      log_error "🚨 命令 '$1' 需要第二个参数"
+      exit 1
+    else
+      log_info "🚀 执行 Laradock '$1' 命令，参数: $2"
+      $docker_compose "$1" -d "$2"
+    fi
+    ;;
+  "logs"|"build"|"start"|"restart")
+    # 这些命令必须传第二个参数
+    if [ "$#" -lt 2 ]; then
+      log_error "🚨 命令 '$1' 需要第二个参数"
+      exit 1
+    else
+      log_info "🚀 执行 Laradock $1 $2"
+      $docker_compose "$1" "$2"
+    fi
+    ;;
+  "stop")
+    # stop 命令可以不传第二个参数
+    if [ "$#" -eq 1 ]; then
+      log_info "⏳ 停止所有 Laradock 容器"
+      $docker_compose stop
+    else
+      log_info "⏳ 停止 Laradock 服务: $2"
+      $docker_compose stop "$2"
+    fi
+    ;;
+  "exec")
+    log_info "🚀Laradock $2 container..."
+    if [ "$2" = "workspace" ]; then
+      $docker_compose exec --user=laradock "$2" bash
+    else
+      $docker_compose exec "$2" bash
+    fi
+    ;;
+  *)
+    log_error "❌ 未知命令: $1"
+    exit 1
+    ;;
+esac

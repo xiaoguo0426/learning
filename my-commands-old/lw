@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# 引入公共部分
+source /home/xiaoguo0426/my-commands/common.sh
+
+laradock_path="$HOME/gits/laradock"
+restart_workspace="docker compose restart workspace"
+enter_workspace="docker compose exec --user=laradock workspace bash"
+
+if [ "$#" -eq 0 ]; then
+  log_info "🚀Laradock Workspace container..."
+  cd $laradock_path
+  $enter_workspace
+elif [ "$#" -eq 1 ]; then
+  if [ "$1" = "-8" ]; then
+    log_info "🚀Laradock 8 Workspace container..."
+    cd $laradock_path
+    $enter_workspace
+  elif [ "$1" = "-r" ]; then
+    log_warning "⏳Restart Laradock 8 Workspace container"
+    cd $laradock_path
+    $restart_workspace
+    log_info "🚀Laradock Workspace 8 container..."
+    $enter_workspace
+  fi
+elif [ "$#" -eq 2 ]; then
+  if [ "$1" = "-8" ] && [ "$2" = "-r" ]; then
+    log_warning "⏳Restart Laradock 8 Workspace container"
+    cd $laradock_path
+    $restart_workspace
+    log_info "🚀Laradock 8 Workspace container..."
+    $enter_workspace
+  fi
+fi

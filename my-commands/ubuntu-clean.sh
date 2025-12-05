@@ -1,1 +1,0 @@
-/home/xiaoguo0426/my-commands/ubuntu-clean.sh
